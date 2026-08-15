@@ -240,6 +240,13 @@ encyclopedia and not the source of truth for every project fact.
 Keep each rule in one canonical location. Link to it elsewhere instead of
 maintaining summaries that can drift.
 
+When a project defines a named contract as a set of promises or constraints —
+such as its privacy model, compatibility guarantees, or supported surfaces — do
+not silently reproduce only part of that set. Either preserve every constraint
+and exception that materially affects agent decisions, or state the compact
+invariant and route to the canonical source for the complete contract. A
+shortened list must not appear exhaustive while omitting obligations.
+
 Prefer high-fidelity project artifacts over prose when they express a contract
 more precisely. A test suite, schema, typed interface, executable script,
 fixture, or maintained mockup may be the best source for a task.
