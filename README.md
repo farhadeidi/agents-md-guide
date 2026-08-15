@@ -16,13 +16,15 @@ coding agent access to this guide:
 Read https://github.com/farhadeidi/agents-md-guide in full.
 
 Then inspect this repository and create or update its agent instruction files
-according to that guide. Preserve useful existing guidance, do not invent
-project requirements, and keep AGENTS.md as the canonical instruction source.
-Inspect before asking questions, and ask only about material facts that cannot
-be discovered from the repository. If no change is warranted, explain why and
-leave the repository unchanged. If any optional patterns in this guide are
-relevant, present only those patterns with their trade-offs and add them only
-after explicit user approval.
+according to that guide. Begin any warranted AGENTS.md with a concise, verified
+explanation of what the project is, then organize the remaining guidance around
+the repository's actual concepts and workflows rather than a universal outline.
+Preserve useful existing guidance, do not invent project requirements, and keep
+AGENTS.md as the canonical instruction source. Inspect before asking questions,
+and ask only about material facts that cannot be discovered from the repository.
+If no change is warranted, explain why and leave the repository unchanged. If
+any optional patterns in this guide are relevant, present only those patterns
+with their trade-offs and add them only after explicit user approval.
 ```
 
 The agent should inspect before writing, ask only necessary questions, and
@@ -39,8 +41,8 @@ universal template.
 
 ## Purpose
 
-Create the smallest set of durable instructions that helps an agent make better
-decisions in the repository in front of it.
+Create the smallest set of durable project context and instructions that helps
+an agent make better decisions in the repository in front of it.
 
 The result must be specific to that repository. It must not be a generic
 template filled with inferred stack details or broadly applicable engineering
@@ -48,6 +50,17 @@ advice.
 
 A valid result may be no change, or no instruction file at all, when the
 repository has no durable guidance worth loading on every task.
+
+A useful result should let an unfamiliar agent quickly answer:
+
+- What is this project, and what does it enable for its users or consumers?
+- Which product qualities, domain rules, and boundaries must remain true?
+- How do its important surfaces or components relate to one another?
+- Which mistakes are easy, costly, or difficult to detect?
+- How should a change be verified in proportion to its scope?
+- Which additional source must be read for a specialized workflow?
+
+These are evaluation questions, not required sections or a universal template.
 
 ## Core rules
 
@@ -65,6 +78,24 @@ Do not silently repurpose it.
 
 Do not invent requirements, risks, conventions, commands, or workflows that the
 repository does not support.
+
+### Explain the project before its rules
+
+When an instruction file is warranted, open with a short, verified explanation
+of what the project is. Describe the product, service, library, or other artifact
+in domain terms before listing its implementation details. Include who or what
+it serves and its essential operating model only when that context changes how
+an agent should reason about the work.
+
+Connect important applications, packages, adapters, platforms, or delivery
+surfaces back to that whole. A stack inventory or directory list alone does not
+explain the project. In a multi-surface system, distinguish behavior that must
+remain consistent from capability differences that are intentional.
+
+Keep this orientation concise. Do not copy marketing prose, feature catalogs,
+roadmaps, or a long architecture document into always-loaded context. If the
+project's purpose cannot be established from reliable repository evidence and
+would materially affect the result, ask the maintainer instead of guessing.
 
 ### Resolve material unknowns
 
@@ -103,10 +134,11 @@ Every line in an always-loaded instruction file consumes attention on every
 task. Include an instruction only when it is:
 
 - specific to the repository;
-- not reliably, cheaply, and consistently derivable when the agent needs it;
+- not reliably, cheaply, and consistently derivable when the agent needs it, or
+  important enough to orient every task;
 - relevant across many tasks in its scope;
 - durable or important enough to maintain alongside the project;
-- actionable by an agent; and
+- usable by an agent when deciding where, how, or whether to make a change; and
 - more valuable than the context and maintenance cost it introduces.
 
 Concise architecture maps, package boundaries, or product-surface lists may be
@@ -117,9 +149,9 @@ Brevity is a design constraint, not a fixed line limit. Remove content until
 removing more would make agents less reliable.
 
 High-value content commonly includes non-obvious terminology, project
-invariants, costly risks, boundaries that are easy to violate, concise
-orientation that prevents expensive rediscovery, targeted validation commands,
-and routes to canonical documentation.
+purpose, product priorities, invariants, costly risks, boundaries that are easy
+to violate, concise orientation that prevents expensive rediscovery, targeted
+validation commands, and routes to canonical documentation.
 
 Exclude generic engineering advice, exhaustive maps that do not improve
 decisions, formatting rules already enforced by tools, speculative risks,
@@ -129,6 +161,45 @@ unverified capabilities, and temporary state.
 Generic behavioral guidance must not be added by default. It becomes project
 policy only when maintainers explicitly adopt it, accept its trade-offs, and
 want every agent working in that repository to follow it.
+
+### Preserve judgment within clear boundaries
+
+State the outcome, invariant, interface, or risk that matters, then leave room
+for the agent to choose an implementation that fits the task and surrounding
+code. Do not prescribe comment density, abstraction style, step sequences,
+tools, or other implementation choices unless the repository has a durable,
+evidence-backed reason to require them.
+
+Use absolute language only for genuine absolutes, and scope it precisely. When
+a rule could be over-applied, include the reason or boundary that lets an agent
+exercise judgment safely. Prefer instructions that explain what must remain true
+over instructions that anticipate every possible action.
+
+Use examples sparingly to clarify a contract, format, or non-obvious edge case.
+Do not rely on examples as a substitute for describing the actual interface, and
+do not let an example accidentally narrow the set of valid solutions.
+
+Before adding a corrective rule, check whether source structure, typed
+interfaces, tests, tooling, or an existing instruction already communicates it.
+Do not repeat rules for emphasis; reconcile overlapping or conflicting guidance
+instead.
+
+### Organize for retrieval and maintenance
+
+Group the selected context into categories derived from the project rather than
+forcing every repository into the same outline. Product priorities, terminology,
+cross-surface concerns, dangerous operations, architecture, development,
+verification, and conditional workflow routes are possible categories, not
+required headings.
+
+Each section should help answer a distinct class of decisions. Keep related
+context together, name headings in the project's own language, and omit any
+category that has no high-value content. Do not mirror the directory tree merely
+to make the document look structured.
+
+Choose a structure that maintainers can scan and update without rereading an
+undifferentiated rule list. Categorization improves retrieval; it does not
+justify extra prose or duplication.
 
 ### Put information in its natural source of truth
 
@@ -145,13 +216,18 @@ encyclopedia and not the source of truth for every project fact.
 Keep each rule in one canonical location. Link to it elsewhere instead of
 maintaining summaries that can drift.
 
+Prefer high-fidelity project artifacts over prose when they express a contract
+more precisely. A test suite, schema, typed interface, executable script,
+fixture, or maintained mockup may be the best source for a task.
+
 ### Route specialized workflows on demand
 
 Route infrequent or detailed review, release, deployment, migration, and testing
 procedures out of always-on context. Keep compact preconditions in `AGENTS.md`
 when they apply frequently or prevent immediate, expensive, or irreversible
-harm. Point to a focused project-owned document or existing skill for the full
-procedure and state exactly when it must be read.
+harm. Point to the most authoritative project-owned document, script, test,
+schema, code reference, artifact, or existing skill for the full context and
+state exactly when it must be loaded.
 
 Use direct routing language:
 
@@ -160,6 +236,15 @@ Before reviewing changes, read `docs/reviewing.md` in full.
 Before publishing a release, read `docs/releasing.md` in full.
 When changing the database schema, follow `docs/schema-migrations.md`.
 ```
+
+A bare `Reference`, `Links`, or `Further reading` list is not a workflow route.
+Attach each destination to the condition that makes it relevant and say whether
+the agent must read it in full or follow a specific section.
+
+Prefer reusing the repository's natural sources over creating a parallel tree
+of agent-only documents. Add a new focused document only when durable,
+project-specific knowledge has no better home and materially benefits from
+on-demand loading.
 
 Only add a route when the destination exists, is current, and contains
 project-specific information that materially changes the workflow.
@@ -199,6 +284,10 @@ Do not record current branches, issue counts, active work, deployment state,
 temporary incidents, roadmap status, or other rapidly changing facts in durable
 agent instructions.
 
+Do not use `AGENTS.md` as session memory, a diary of fixes, or a collection of
+past incidents. A recurring failure may justify a durable invariant or warning;
+record the lesson that changes future decisions, not the story of the incident.
+
 When an agent needs live state, point it to the command or system that provides
 the current value instead of copying the value into documentation.
 
@@ -220,11 +309,21 @@ means clear ownership and change-coupled maintenance, not immutability.
 
 Before finishing:
 
+- confirm the opening context explains what the project is in domain or product
+  terms, not only which technologies and directories it contains;
 - confirm every referenced path exists;
 - validate documented commands non-destructively by inspecting their definitions
   or using a safe help, dry-run, or targeted path;
+- label targeted, local, full, and CI-only verification accurately;
+- cross-check the scope and exceptions behind absolute claims such as `all`,
+  `never`, `only`, or repository-wide prohibitions;
 - verify symlinks and imports from a fresh checkout perspective;
-- search for contradictory or duplicated instructions;
+- search all applicable instruction layers for contradictory, overlapping, or
+  duplicated guidance;
+- ensure rules define necessary outcomes and boundaries without constraining
+  valid implementation choices accidentally;
+- ensure headings group the selected context naturally without imposing empty
+  template sections;
 - ensure compatibility files do not contain independent policy; and
 - reread the final instructions as a complete document.
 
