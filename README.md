@@ -151,6 +151,10 @@ platform, and target harness support it. Otherwise, use the smallest compatible
 pointer or import. Do not duplicate the contents manually.
 
 Create compatibility entry files only for harnesses the project actually uses.
+Treat tracked harness-specific configuration, workflows, documentation, or
+skill directories — such as `.claude/` — as evidence that the corresponding
+harness is used. Do not create a compatibility entry merely because a harness
+is popular or commonly supported.
 
 ### Maximize decision value, not instruction volume
 
@@ -242,10 +246,12 @@ maintaining summaries that can drift.
 
 When a project defines a named contract as a set of promises or constraints —
 such as its privacy model, compatibility guarantees, or supported surfaces — do
-not silently reproduce only part of that set. Either preserve every constraint
-and exception that materially affects agent decisions, or state the compact
-invariant and route to the canonical source for the complete contract. A
-shortened list must not appear exhaustive while omitting obligations.
+not silently reproduce only part of that set. When the contract is detailed,
+prefer a compact, durable invariant followed by a conditional route to its
+canonical source instead of duplicating every constraint and exception. Keep a
+detail inline only when an agent must know it before following that route or
+when omitting it could cause immediate harm. A shortened list must not appear
+exhaustive while omitting obligations.
 
 Prefer high-fidelity project artifacts over prose when they express a contract
 more precisely. A test suite, schema, typed interface, executable script,
