@@ -15,6 +15,11 @@ coding agent access to this guide:
 ```text
 Read https://github.com/farhadeidi/agents-md-guide in full.
 
+Use this guide as the only initialization methodology unless I explicitly
+approve another. Before loading or applying an overlapping initializer,
+bootstrap skill, template, or guide, identify it and ask whether I want a
+guide-only or combined initialization. Do not load it before I approve it.
+
 Then inspect this repository and create or update its agent instruction files
 according to that guide. Begin any warranted AGENTS.md with a concise, verified
 explanation of what the project is, then organize the remaining guidance around
@@ -115,6 +120,25 @@ Choosing optional behavioral patterns is a legitimate user decision, but ask
 only after inspection and present only patterns relevant to the repository.
 Explain the trade-off of each option, make no selection by default, and treat
 choosing none as a complete answer.
+
+### Keep initialization provenance explicit
+
+When this guide is explicitly invoked, treat it as the only initialization
+methodology unless the user approves named additional sources. Before loading or
+applying another initializer, bootstrap skill, template, or guide that overlaps
+this guide, identify it and ask whether the user wants a guide-only or combined
+initialization. Combined use requires explicit approval; without it, do not load
+the overlapping source.
+
+This permission boundary does not apply to ordinary repository-inspection tools,
+built-in capabilities, or project-owned artifacts used as evidence. It applies
+when another source would introduce its own process, policy, defaults, or
+judgment about how agent instructions should be initialized.
+
+If the harness has already injected a mandatory overlapping workflow or cannot
+defer loading it, disclose that limitation before continuing and ask whether to
+proceed. Never describe the result as guide-only. At handoff, name every approved
+overlapping source that materially influenced the result.
 
 ### Keep one canonical instruction entry
 
