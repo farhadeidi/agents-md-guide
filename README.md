@@ -3,9 +3,10 @@
 A model-agnostic guide for writing concise, project-specific instructions in
 `AGENTS.md`, `CLAUDE.md`, and compatible agent entry files.
 
-This project does not introduce a new instruction format, agent harness, or
-project workflow. It defines a small set of rules that any capable coding agent
-can apply after inspecting a repository.
+This public, open-source project does not introduce a new instruction format or
+agent harness. It defines a small set of authoring rules and a human-validated
+initialization workflow that any capable coding agent can apply after inspecting
+a repository.
 
 ## Quick start
 
@@ -13,27 +14,16 @@ From the repository you want to initialize or update, give your preferred
 coding agent access to this guide:
 
 ```text
-Read https://github.com/farhadeidi/agents-md-guide in full.
-
-Use this guide as the only initialization methodology unless I explicitly
-approve another. Before loading or applying an overlapping initializer,
-bootstrap skill, template, or guide, identify it and ask whether I want a
-guide-only or combined initialization. Do not load it before I approve it.
-
-Then inspect this repository and create or update its agent instruction files
-according to that guide. Begin any warranted AGENTS.md with a concise, verified
-explanation of what the project is, then organize the remaining guidance around
-the repository's actual concepts and workflows rather than a universal outline.
-Preserve useful existing guidance, do not invent project requirements, and keep
-AGENTS.md as the canonical instruction source. Inspect before asking questions,
-and ask only about material facts that cannot be discovered from the repository.
-If no change is warranted, explain why and leave the repository unchanged. If
-any optional patterns in this guide are relevant, present only those patterns
-with their trade-offs and add them only after explicit user approval.
+Initialize this repository using
+https://github.com/farhadeidi/agents-md-guide/blob/main/README.md as the sole
+methodology. Read it in full and follow its required references. Ask at most one
+question or request one approval per message, and keep the repository read-only
+until I approve the exact patch.
 ```
 
-The agent should inspect before writing, ask only necessary questions, and
-produce the smallest useful result. Depending on the repository, that may be:
+The agent should inspect before proposing, ask only necessary factual questions,
+obtain explicit approval at the workflow's semantic checkpoints, and produce the
+smallest useful result. Depending on the repository, that may be:
 
 - a concise root `AGENTS.md`;
 - a compatible entry such as `CLAUDE.md` pointing to `AGENTS.md`;
@@ -66,6 +56,10 @@ A useful result should let an unfamiliar agent quickly answer:
 - Which additional source must be read for a specialized workflow?
 
 These are evaluation questions, not required sections or a universal template.
+
+When creating or updating instruction files, read
+[`initialization.md`](initialization.md) in full and follow its staged,
+human-validated workflow.
 
 ## Core rules
 
@@ -102,15 +96,37 @@ roadmaps, or a long architecture document into always-loaded context. If the
 project's purpose cannot be established from reliable repository evidence and
 would materially affect the result, ask the maintainer instead of guessing.
 
+### Validate interpretation before persistence
+
+Repository evidence can establish facts, but it cannot authorize the agent's
+interpretation of the project's identity, priorities, boundaries, or durable
+policy. Present that synthesis to the maintainer before using it as the basis
+for instruction files.
+
+Treat the project explanation as a blocking semantic checkpoint. Show the
+proposed wording, the evidence behind it, and any inference or uncertainty. Let
+the maintainer approve, edit, reject, or request more evidence. Continue only
+after explicit confirmation.
+
+Approval of the project explanation does not approve the instruction policy or
+the final patch. Follow the distinct checkpoints in
+[`initialization.md`](initialization.md). A tool's permission to write answers
+whether an action may execute; it does not establish that the durable content is
+accurate or wanted.
+
 ### Resolve material unknowns
 
-Inspect the repository before asking questions. Ask the user only when an
-answer cannot be discovered from repository evidence and would materially
-change the instructions or the authorized scope.
+Inspect the repository before asking the user to supply facts. Ask a factual
+question only when the answer cannot be discovered from repository evidence and
+would materially change the instructions or the authorized scope. Separately,
+always ask the maintainer to validate the agent's proposed synthesis and policy;
+that review is not a request to repeat discoverable facts.
 
-Group related questions, keep them focused, and explain why each answer matters.
-Do not ask about facts that can be verified from source, configuration,
-documentation, history, or tooling.
+Order material unknowns by dependency and decision value. Ask exactly one
+question per message, explain why its answer matters, wait for the answer, and
+incorporate it before asking the next question. Do not disguise a questionnaire
+as one compound question, and do not ask about facts that can be verified from
+source, configuration, documentation, history, or tooling.
 
 When uncertainty affects only optional guidance, omit that guidance and report
 the omission instead of blocking initialization. Never turn initialization into
@@ -118,8 +134,8 @@ a fixed questionnaire.
 
 Choosing optional behavioral patterns is a legitimate user decision, but ask
 only after inspection and present only patterns relevant to the repository.
-Explain the trade-off of each option, make no selection by default, and treat
-choosing none as a complete answer.
+Present one adoption decision at a time, explain its trade-off, make no selection
+by default, and treat choosing none as a complete answer.
 
 ### Keep initialization provenance explicit
 
@@ -146,6 +162,11 @@ When project instructions are warranted, use the root `AGENTS.md` as their
 canonical entry. Other agent entry files must point to it rather than maintain
 independent copies of the same policy.
 
+When selecting compatibility entries, import syntax, or nested scopes, read
+[`harness-compatibility.md`](harness-compatibility.md) and verify the current
+vendor documentation for every target harness. Do not infer identical discovery
+or precedence behavior from shared support for `AGENTS.md`.
+
 Use a relative symlink such as `CLAUDE.md -> AGENTS.md` when the repository,
 platform, and target harness support it. Otherwise, use the smallest compatible
 pointer or import. Do not duplicate the contents manually.
@@ -155,6 +176,12 @@ Treat tracked harness-specific configuration, workflows, documentation, or
 skill directories — such as `.claude/` — as evidence that the corresponding
 harness is used. Do not create a compatibility entry merely because a harness
 is popular or commonly supported.
+
+List every applicable instruction source during initialization and identify its
+ownership: project, personal, managed, generated, or external. Present conflicts
+and the proposed resolution before changing canonical project policy. Imported
+or generated guidance does not become project policy merely because a harness
+can discover it.
 
 ### Maximize decision value, not instruction volume
 
@@ -296,6 +323,17 @@ Do not create nested files merely to describe directory contents. If harness
 behavior is uncertain, prefer a root-level route to the relevant project
 documentation over relying on unsupported precedence.
 
+### Add code-review rules conditionally
+
+When the repository actually uses agentic code review, a scoped code-review
+section may capture consequential, non-obvious invariants that reviewers must
+apply repeatedly. State the invariant narrowly and include the safe path or
+exception when over-application is plausible.
+
+Keep deterministic formatting, lint, type, and policy checks in executable
+tooling. Do not add a code-review rule merely because a linter or CI job already
+expresses the same requirement reliably.
+
 ### Preserve useful existing guidance
 
 When adopting an existing repository, read all applicable instruction files
@@ -310,7 +348,8 @@ shape.
 
 Document only controls the repository actually requires. Do not introduce
 mandatory reviews, approval gates, branch strategies, work tiers, hooks, CI, or
-specialized skills as initialization ceremony.
+specialized skills as project policy merely because the initializer uses
+human-validation checkpoints while creating durable instructions.
 
 Distinguish clearly between requirements enforced by tooling and advice that
 depends on agent judgment.
@@ -361,7 +400,10 @@ Before finishing:
   valid implementation choices accidentally;
 - ensure headings group the selected context naturally without imposing empty
   template sections;
-- ensure compatibility files do not contain independent policy; and
+- ensure compatibility files do not contain independent policy;
+- confirm the written files match the exact patch the maintainer approved;
+- when a safe harness command exists, verify which instruction layers are
+  actually discovered from the relevant working directories; and
 - reread the final instructions as a complete document.
 
 Never execute a destructive, external, privileged, or costly command merely to
@@ -369,6 +411,10 @@ verify documentation.
 
 If a statement cannot be verified, omit it or label the uncertainty instead of
 presenting it as project policy.
+
+When implementing or evaluating an initializer based on this guide, run the
+behavioral scenarios in [`evaluation.md`](evaluation.md). Treat workflow
+violations as failures even when the generated prose appears correct.
 
 ## Optional patterns
 
@@ -387,6 +433,11 @@ The initial catalog includes:
 - [Focused changes](patterns/focused-changes.md)
 - [Simplicity first](patterns/simplicity-first.md)
 - [Goal-driven verification](patterns/goal-driven-verification.md)
+
+Pattern selection occurs during the instruction-policy checkpoint in
+[`initialization.md`](initialization.md). Approval of a pattern candidate is not
+approval of its final wording; include the adapted wording in the exact patch
+review.
 
 ## Non-goals
 

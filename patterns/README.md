@@ -17,13 +17,16 @@ An agent applying the main guide must:
 3. Read a candidate pattern in full before recommending it.
 4. Recommend only patterns that address a plausible need in that repository.
 5. Explain why each pattern may help and where it may be counterproductive.
-6. Ask once about the focused set of candidates; never present a fixed catalog
-   questionnaire.
+6. Present one candidate and one adoption question at a time. Wait for the
+   answer and incorporate it before presenting another candidate; never present
+   a fixed catalog questionnaire.
 7. Add only patterns the user explicitly approves. No response means no
    adoption.
-8. Adapt approved wording to the target without weakening its trade-off or
+8. Include the adapted wording in the exact patch review; approval of the
+   candidate pattern alone does not approve its final wording.
+9. Adapt approved wording to the target without weakening its trade-off or
    duplicating existing policy.
-9. Make the target instruction self-contained. The adopted policy lives in the
+10. Make the target instruction self-contained. The adopted policy lives in the
    target repository and must not depend on this catalog at runtime.
 
 Choosing none is always valid and completes pattern selection.
