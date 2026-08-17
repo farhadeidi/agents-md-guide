@@ -10,12 +10,12 @@ Initialization follows this state model:
 INSPECT
   → PROPOSE UNDERSTANDING
   → CONFIRM OR REVISE UNDERSTANDING
-  → PROPOSE POLICY AND ARTIFACTS
-  → CONFIRM OR REVISE POLICY AND ARTIFACTS
-  → PREVIEW EXACT PATCH
-  → CONFIRM OR REVISE PATCH
-  → WRITE
-  → VERIFY
+  → RESOLVE MATERIAL CHOICES
+    ├─ CONFIRM NO CHANGE → VERIFY
+    └─ PREVIEW EXACT PATCH
+       → CONFIRM OR REVISE PATCH
+       → WRITE
+       → VERIFY
 ```
 
 Before `WRITE`, remain read-only in the target repository. Silence, filesystem
@@ -83,9 +83,9 @@ from an unconfirmed project model.
 **Complete when:** the maintainer explicitly confirms the understanding, or
 provides edits that are incorporated and shown back until confirmed.
 
-## 3. Propose policy and artifacts
+## 3. Resolve material choices and draft
 
-Using only the confirmed project understanding, present:
+Using only the confirmed project understanding, identify:
 
 - each durable fact, invariant, hazard, boundary, verification route, or
   workflow trigger proposed for always-loaded context;
@@ -100,17 +100,23 @@ Using only the confirmed project understanding, present:
 - facts deliberately excluded because they are generic, mechanical, volatile,
   speculative, duplicated, or cheap to rediscover.
 
-List all instruction sources that influenced the proposal and identify their
+List every instruction source that influences the draft and identify its
 ownership. If an overlapping external initializer or imported configuration is
 involved, apply the provenance rules in the main guide before using it.
 
-Resolve policy, artifact, and optional-pattern choices one question at a time.
-After those choices are settled, present the resulting plan and ask one explicit
-question to approve it or provide an edit. Choosing no files, no optional
-patterns, or no change is a complete result.
+Ask the maintainer only about choices that would materially change the policy or
+artifact set and cannot be resolved from repository evidence or the confirmed
+understanding. Resolve those choices one question at a time. Present each
+optional pattern as its own adoption decision with its benefit and cost. Once
+the material choices are settled, draft the exact patch without adding a
+separate approval round for a restatement of the plan.
 
-**Complete when:** the maintainer explicitly confirms the selected policy,
-artifact set, and optional-pattern decisions.
+When no change is warranted, present the evidence and rationale and ask for one
+confirmation. After confirmation, skip patch preview and writing, verify that
+the repository remains unchanged, and hand off the result.
+
+**Complete when:** every material choice needed to draft the patch is resolved,
+or the maintainer has confirmed the no-change conclusion.
 
 ## 4. Preview the exact patch
 
@@ -119,10 +125,10 @@ multiple artifacts, present the canonical `AGENTS.md` first, followed by scoped
 instructions and small compatibility entries.
 
 The preview must expose every addition, deletion, move, import, and symlink.
-Approval of the project understanding or policy plan does not imply approval of
-the wording. When the maintainer edits or rejects part of the patch, revise and
-show the affected patch again. Ask only one question: whether the exact current
-patch is approved or needs an edit.
+Approval of the project understanding does not imply approval of the wording.
+When the maintainer edits or rejects part of the patch, revise and show the
+affected patch again. Ask only one question: whether the exact current patch is
+approved or needs an edit.
 
 **Complete when:** the maintainer explicitly approves the exact current patch.
 

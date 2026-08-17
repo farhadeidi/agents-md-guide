@@ -21,9 +21,8 @@ question or request one approval per message, and keep the repository read-only
 until I approve the exact patch.
 ```
 
-The agent should inspect before proposing, ask only necessary factual questions,
-obtain explicit approval at the workflow's semantic checkpoints, and produce the
-smallest useful result. Depending on the repository, that may be:
+The agent should inspect before proposing and produce the smallest useful result.
+Depending on the repository, that may be:
 
 - a concise root `AGENTS.md`;
 - a compatible entry such as `CLAUDE.md` pointing to `AGENTS.md`;
@@ -95,47 +94,6 @@ Keep this orientation concise. Do not copy marketing prose, feature catalogs,
 roadmaps, or a long architecture document into always-loaded context. If the
 project's purpose cannot be established from reliable repository evidence and
 would materially affect the result, ask the maintainer instead of guessing.
-
-### Validate interpretation before persistence
-
-Repository evidence can establish facts, but it cannot authorize the agent's
-interpretation of the project's identity, priorities, boundaries, or durable
-policy. Present that synthesis to the maintainer before using it as the basis
-for instruction files.
-
-Treat the project explanation as a blocking semantic checkpoint. Show the
-proposed wording, the evidence behind it, and any inference or uncertainty. Let
-the maintainer approve, edit, reject, or request more evidence. Continue only
-after explicit confirmation.
-
-Approval of the project explanation does not approve the instruction policy or
-the final patch. Follow the distinct checkpoints in
-[`initialization.md`](initialization.md). A tool's permission to write answers
-whether an action may execute; it does not establish that the durable content is
-accurate or wanted.
-
-### Resolve material unknowns
-
-Inspect the repository before asking the user to supply facts. Ask a factual
-question only when the answer cannot be discovered from repository evidence and
-would materially change the instructions or the authorized scope. Separately,
-always ask the maintainer to validate the agent's proposed synthesis and policy;
-that review is not a request to repeat discoverable facts.
-
-Order material unknowns by dependency and decision value. Ask exactly one
-question per message, explain why its answer matters, wait for the answer, and
-incorporate it before asking the next question. Do not disguise a questionnaire
-as one compound question, and do not ask about facts that can be verified from
-source, configuration, documentation, history, or tooling.
-
-When uncertainty affects only optional guidance, omit that guidance and report
-the omission instead of blocking initialization. Never turn initialization into
-a fixed questionnaire.
-
-Choosing optional behavioral patterns is a legitimate user decision, but ask
-only after inspection and present only patterns relevant to the repository.
-Present one adoption decision at a time, explain its trade-off, make no selection
-by default, and treat choosing none as a complete answer.
 
 ### Keep initialization provenance explicit
 
@@ -401,7 +359,6 @@ Before finishing:
 - ensure headings group the selected context naturally without imposing empty
   template sections;
 - ensure compatibility files do not contain independent policy;
-- confirm the written files match the exact patch the maintainer approved;
 - when a safe harness command exists, verify which instruction layers are
   actually discovered from the relevant working directories; and
 - reread the final instructions as a complete document.
@@ -433,11 +390,6 @@ The initial catalog includes:
 - [Focused changes](patterns/focused-changes.md)
 - [Simplicity first](patterns/simplicity-first.md)
 - [Goal-driven verification](patterns/goal-driven-verification.md)
-
-Pattern selection occurs during the instruction-policy checkpoint in
-[`initialization.md`](initialization.md). Approval of a pattern candidate is not
-approval of its final wording; include the adapted wording in the exact patch
-review.
 
 ## Non-goals
 

@@ -4,6 +4,10 @@
 **Scope:** Current first-party guidance related to `AGENTS.md` / `CLAUDE.md`, project initialization, context engineering, human-in-the-loop approval, and onboarding.
 **Repository reviewed:** `farhadeidi/agents-md-guide` at commit `5775d8f`.
 
+> Historical, non-normative research snapshot. Some recommendations below were
+> implemented after this review. The root `README.md` and its linked guides are
+> authoritative.
+
 ## Executive summary
 
 The repository's central direction is well aligned with the current primary-source guidance: inspect the repository first, keep always-loaded instructions concise and high-signal, scope specialized guidance narrowly, prefer one canonical instruction source, and avoid replacing enforceable tooling with prose.
@@ -208,12 +212,6 @@ After writing, verify both the filesystem result and the harness-visible result 
 #### 10. Define an explicit non-interactive exception
 
 If the guide ever supports CI or headless initialization, make it opt-in and conservative: generate a review artifact or patch, but do not commit or overwrite durable instruction files without an explicitly supplied acceptance mechanism. The interactive, maintainer-reviewed path should remain the default.
-
-## Suggested wording for the Quick start contract
-
-The following is not a full rewrite, but captures the missing behavior:
-
-> Inspect the repository without creating or changing files. Then present a concise, evidence-backed proposal containing: (1) your understanding of what the project is, (2) the durable guidance you think belongs in agent instructions, (3) material unknowns, and (4) the files you propose to create or update. Show the proposed project summary separately and wait for me to approve or edit it before using it as the basis for the instructions. After those decisions are confirmed, show the exact proposed contents or patch and wait for explicit approval before writing. Filesystem permissions or automatic approvals do not count as approval of the content. If I request changes, revise the proposal and show it again. After writing the approved patch, verify instruction discovery, links, imports, and conflicts, and report the final result.
 
 ## Bottom line
 

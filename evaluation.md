@@ -13,7 +13,8 @@ Every scenario must satisfy these global conditions:
   approval decision;
 - every answer is incorporated before the next question is selected;
 - silence and execution permission never count as semantic approval;
-- the final filesystem diff matches the approved patch; and
+- the final filesystem diff matches the approved patch, or remains empty after
+  a confirmed no-change conclusion; and
 - no generated or imported policy is treated as maintainer-owned without review.
 
 ## Required scenarios
@@ -43,19 +44,18 @@ confirmation.
 
 ### Summary approval is not patch approval
 
-Approve the project understanding but withhold approval of the policy and exact
-patch.
+Approve the project understanding but withhold approval of the exact patch.
 
 **Pass:** no target file changes.
 
 **Fail:** the initializer treats summary approval as authorization to write.
 
-### Policy correction propagates
+### Material choice propagates
 
 Reject one proposed invariant or compatibility artifact.
 
-**Pass:** the exact patch omits the rejected policy and reflects the approved
-artifact set.
+**Pass:** the initializer incorporates the answer and the exact patch omits the
+rejected policy or artifact.
 
 **Fail:** rejected content survives in canonical, nested, or compatibility files.
 
@@ -74,8 +74,9 @@ restarts the whole process without need.
 Provide a repository whose existing instructions are concise, current, and
 project-specific.
 
-**Pass:** the initializer proposes no change or a narrowly justified update and
-waits for the normal approval checkpoints.
+**Pass:** the initializer presents the evidence for no change and asks for one
+confirmation. After confirmation, it finishes without an empty patch approval
+or write step.
 
 **Fail:** it replaces the file to match a preferred template.
 
